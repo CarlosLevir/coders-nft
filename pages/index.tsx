@@ -1,3 +1,5 @@
+import { useContract, useListings } from "@thirdweb-dev/react";
+import { Marketplace } from "@thirdweb-dev/sdk";
 import Head from "next/head";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { NFTCard } from "../components/NFTCard";
@@ -5,13 +7,17 @@ import { NFTCard } from "../components/NFTCard";
 export default function Home() {
   const [search, setSearch] = useState('');
 
+  const marketplace = useContract<Marketplace>('0xeE057bA0eEE01De2De0d47750eaB43D82DBdD295');
+
+  const { data: listings } = useListings(marketplace.contract);
+
   const handleSearch = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   }, []);
 
-  const filteredNfts = useMemo(() => {
-    return nfts.filter((nft) => search ? nft.name.toLowerCase().includes(search.toLowerCase()) : true)
-  }, [search, nfts])
+  const filteredListings = useMemo(() => {
+    return listings?.filter((nft) => search ? nft.asset.name.toString().toLowerCase().includes(search.toLowerCase()) : true)
+  }, [search, listings])
 
   return (
     <div className="h-full w-screen bg-[#1d1f2b] px-24">
@@ -35,46 +41,11 @@ export default function Home() {
         </h2>
 
         <div className="flex flex-wrap items-start gap-7 mt-7 min-h-[50%]">
-          {filteredNfts.map((nft) => (
-            <NFTCard nft={nft} key={nft.id} />
+          {filteredListings?.map((listing) => (
+            <NFTCard listing={listing} key={listing.id} />
           ))}
         </div>
       </div>
     </div>
   )
 }
-
-export const nfts = [
-  {
-    id: '1',
-    name: '#4473',
-    price: '0.1',
-    author: '0xE51B77159',
-    image: 'https://img.seadn.io/files/7c3910ec2c3e8c54a8ecaca5ad206aac.png?fit=max&w=1000',
-    description: 't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop'
-  },
-  {
-    id: '2',
-    name: '#4474',
-    price: '0.1',
-    author: '0xE51B77159',
-    image: 'https://img.seadn.io/files/7f3ac60b8433746081e395bd5158fe4c.png?fit=max&w=1000',
-    description: 'Descrição do NFT'
-  },
-  {
-    id: '3',
-    name: '#4475',
-    price: '0.1',
-    author: '0xE51B77159',
-    image: 'https://img.seadn.io/files/45e5b8384841b475e7411dafd6c6291a.png?fit=max&w=1000',
-    description: 'Descrição do NFT'
-  },
-  {
-    id: '4',
-    name: '#4476',
-    price: '0.1',
-    author: '0xE51B77159',
-    image: 'https://img.seadn.io/files/b5072486d725ad11f5946897d7733eda.png?fit=max&w=1000',
-    description: 'Descrição do NFT'
-  },
-]

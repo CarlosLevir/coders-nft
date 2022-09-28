@@ -1,11 +1,14 @@
+import { ThirdwebProvider, ChainId } from '@thirdweb-dev/react'
 import '../styles/globals.css'
 import Layout from './_layout'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThirdwebProvider desiredChainId={ChainId.Goerli}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThirdwebProvider>
   )
 }
 

@@ -1,35 +1,29 @@
+import { AuctionListing, DirectListing } from "@thirdweb-dev/sdk";
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 import Eth from "../../assets/Eth"
 
 type NFTCardProps = {
-  nft: {
-    id: string;
-    name: string;
-    price: string;
-    author: string;
-    image: string;
-    description: string;
-  }
+  listing: (AuctionListing | DirectListing);
 }
 
-export function NFTCard({ nft }: NFTCardProps) {
+export function NFTCard({ listing }: NFTCardProps) {
   const router = useRouter();
 
   const handleNFTClick = useCallback(() => {
-    router.push(`/nft/${nft.id}`);
+    router.push(`/nft/${listing.id}`);
   }, []);
 
   return (
     <div className="w-[24rem] h-[31rem] bg-[#242634] rounded-[1.25rem] cursor-pointer hover:scale-105 active:scale-95" onClick={handleNFTClick}>
       <div>
-        <img src={nft.image} alt={nft.name} className="rounded-[1.25rem] p-2 w-96 h-80" />
+        <img src={listing.asset.image} alt={listing.asset.name.toString()} className="rounded-[1.25rem] p-2 w-96 h-80" />
       </div>
 
       <div className="mx-6 mt-4">
         <div className="mb-5">
-          <p className="text-2xl font-semibold">{nft.name}</p>
-          <p className="text-[#93989A]">By {nft.author}</p>
+          <p className="text-2xl font-semibold">{listing.asset.name}</p>
+          <p className="text-[#93989A]">By {listing.sellerAddress.slice(0, 6)}</p>
         </div>
 
         <div>
@@ -37,7 +31,7 @@ export function NFTCard({ nft }: NFTCardProps) {
 
           <div className="flex mt-0.5">
             <Eth />
-            <p className="text-xl font-semibold">{nft.price}</p>
+            <p className="text-xl font-semibold">{listing.buyoutCurrencyValuePerToken.displayValue}</p>
           </div>
 
           <div className="relative">
