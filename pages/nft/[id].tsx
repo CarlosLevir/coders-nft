@@ -34,7 +34,7 @@ export default function NFTDetails() {
       setLoadingPurchase(false);
       Notify.failure('Failed to buy this NFT!');
     }
-  }, [listing]);
+  }, [listing, marketplace?.contract?.direct]);
 
   return (
     <div className="px-[10%] min-h-[80vh]">
