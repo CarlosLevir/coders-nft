@@ -34,7 +34,7 @@ This project was created in the Coders Club Cripto Week, with the following tech
 - [ReactJs](https://reactjs.org/)
 - [NextJs](https://nextjs.org/)
 - [ThirdWeb](https://thirdweb.com/)
-- [Typescript](ttps://www.typescriptlang.org/)
+- [Typescript](https://www.typescriptlang.org/)
 - [Tailwind](https://tailwindcss.com/)
 - [Vercel](https://vercel.com/)
 
