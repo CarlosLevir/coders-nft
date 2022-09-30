@@ -20,12 +20,12 @@ export default function Home() {
   }, [search, listings])
 
   return (
-    <div className="h-full w-screen bg-[#1d1f2b] px-24">
+    <div className="h-full w-screen bg-[#1d1f2b] px-[10%] min-h-[80vh]">
       <Head>
         <title>Coders NFT</title>
       </Head>
 
-      <div className="flex justify-between items-baseline">
+      <div className="flex justify-between items-baseline flex-wrap">
         <h2 className="text-5xl font-bold mt-24">
           Discover
         </h2>

@@ -37,15 +37,15 @@ export default function NFTDetails() {
   }, [listing]);
 
   return (
-    <div className="px-24">
+    <div className="px-[10%] min-h-[80vh]">
       <Head>
         <title>{listing.data?.asset.name} - Details Page</title>
       </Head>
 
-      <div className="mt-24 flex justify-between">
-        <img className="rounded-[1.25rem] w-[45%] h-auto" src={listing.data?.asset.image} alt={listing.data?.asset.name.toString()} />
+      <div className="mt-24 flex justify-between flex-wrap gap-10">
+        <img className="rounded-[1.25rem] w-full max-w-xl h-auto" src={listing.data?.asset.image} alt={listing.data?.asset.name.toString()} />
 
-        <div className="ml-10 w-[45%]">
+        <div className="ml-10 w-full max-w-xl">
           <h1 className="text-5xl font-bold">{listing.data?.asset.name}</h1>
           <p className="text-[#93989A] mt-4">
             {listing.data?.asset.description}
@@ -58,7 +58,7 @@ export default function NFTDetails() {
             <p>{nft?.owner.slice(0, 6)} {userIsNFTOwner && ' (You)'}</p>
           </div>
 
-          <hr className="w-full border-[#242634] mt-8 mb-4" />
+          <hr className="w-full border-[#242634] mt-4 mb-8" />
 
           <div>
             <button
